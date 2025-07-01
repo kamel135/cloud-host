@@ -1,0 +1,29 @@
+<h2>👋 مرحبًا {{ customer_name }}</h2>
+
+<h3>🖥️ خوادمك</h3>
+<ul>
+  {% for s in servers %}
+    <li>{{ s.server_name }} - {{ s.status }} - {{ s.ip_address }}</li>
+  {% endfor %}
+</ul>
+
+<h3>💳 اشتراكاتك</h3>
+<ul>
+  {% for sub in subscriptions %}
+    <li>{{ sub.plan }} من {{ sub.start_date }} إلى {{ sub.end_date }} ({{ sub.status }})</li>
+  {% endfor %}
+</ul>
+
+<h3>📄 فواتيرك</h3>
+<ul>
+  {% for inv in invoices %}
+    <li>{{ inv.name }} - {{ inv.amount }} - {{ inv.status }} - {{ inv.due_date }}</li>
+  {% endfor %}
+</ul>
+
+<h3>🎫 تذاكر الدعم</h3>
+<ul>
+  {% for t in tickets %}
+    <li>{{ t.subject }} - {{ t.status }} - {{ t.creation }}</li>
+  {% endfor %}
+</ul>

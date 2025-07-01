@@ -1,0 +1,69 @@
+{
+  "doctype": "DocType",
+  "name": "Cloud Customer",
+  "module": "Cloud Hosting Management",
+  "custom": 1,
+  "is_single": 0,
+  "istable": 0,
+  "fields": [
+    {
+      "fieldname": "customer_name",
+      "label": "Customer Name",
+      "fieldtype": "Data",
+      "reqd": 1
+    },
+    {
+      "fieldname": "email",
+      "label": "Email",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "phone",
+      "label": "Phone",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "address",
+      "label": "Address",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "customer_type",
+      "label": "Customer Type",
+      "fieldtype": "Select",
+      "options": "\nIndividual\nCompany",
+      "default": "Individual"
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "\nActive\nInactive",
+      "default": "Active"
+    },
+    {
+      "fieldname": "notes",
+      "label": "Notes",
+      "fieldtype": "Text"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 0,
+      "cancel": 0,
+      "amend": 0
+    }
+  ],
+  "in_create": 1,
+  "allow_import": 1,
+  "allow_export": 1,
+  "track_changes": 1,
+  "document_type": "Master",
+  "show_name_in_global_search": 1,
+  "search_fields": "customer_name,email"
+}

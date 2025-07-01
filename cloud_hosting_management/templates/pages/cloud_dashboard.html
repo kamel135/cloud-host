@@ -1,0 +1,41 @@
+{% extends "templates/web.html" %}
+
+{% block page_content %}
+<h1>مرحبًا بك في لوحة تحكم الاستضافة السحابية</h1>
+
+{% if frappe.session.user != "Guest" %}
+  {% set cloud_customer = frappe.get_value("Cloud Customer", {"user": frappe.session.user}, "name") %}
+
+  <div class="dashboard" style="padding: 20px; background: #f8f9fa;">
+    <h3>📦 عدد الخوادم الخاصة بك:</h3>
+    <p>{{ frappe.get_all("Cloud Server", filters={"owner": frappe.session.user}, count=True) }}</p>
+
+    <h3>🔁 عدد الاشتراكات النشطة:</h3>
+    <p>{{ frappe.get_all("Cloud Subscription", filters={"owner": frappe.session.user, "status": "Active"}, count=True) }}</p>
+
+    <h3>💰 عدد الفواتير غير المدفوعة:</h3>
+    <p>{{ frappe.get_all("Hosting Invoice", filters={"owner": frappe.session.user, "status": "Unpaid"}, count=True) }}</p>
+
+    <h3>🎫 عدد التذاكر المفتوحة:</h3>
+    <p>{{ frappe.get_all("Support Ticket", filters={"owner": frappe.session.user, "status": "Open"}, count=True) }}</p>
+
+    <h3>💳 رصيدك الحالي:</h3>
+    <p>
+      {{
+        frappe.db.get_value("Cloud Customer", {"user": frappe.session.user}, "balance")
+        or "0.00"
+      }} USD
+    </p>
+
+    <h3>🧾 آخر فاتورة:</h3>
+    {% set last_invoice = frappe.get_all("Hosting Invoice", filters={"owner": frappe.session.user}, fields=["name", "posting_date"], order_by="creation desc", limit=1) %}
+    {% if last_invoice %}
+      <p>رقم الفاتورة: {{ last_invoice[0].name }} | التاريخ: {{ last_invoice[0].posting_date }}</p>
+    {% else %}
+      <p>لا توجد فواتير حتى الآن.</p>
+    {% endif %}
+  </div>
+{% else %}
+  <p>يرجى تسجيل الدخول لعرض لوحة التحكم الخاصة بك.</p>
+{% endif %}
+{% endblock %}
