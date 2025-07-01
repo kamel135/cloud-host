@@ -94,7 +94,24 @@ fixtures = [
 ]
 
 
+###########################
 
+fixtures = [
+    {"dt": "DocType", "filters": [["name", "in", [
+        "Cloud Payment",
+        "Cloud Datacenter",
+        "Cloud Plan",
+        "Cloud Customer",
+        "Cloud Subscription",
+        "Performance Monitoring",
+        "Hosting Invoice",
+        "Cloud Server",
+        "Support Ticket",
+        "Hosting Plan"
+    ]]]},
+]
+
+###################
 
 
 
